@@ -1,0 +1,9 @@
+target
+.classpath
+.project
+.wtpmodules
+secrets.properties
+sample.*.json
+*.log
+*results.txt
+/tomcat.8080

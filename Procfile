@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -cp kriswuollett-sandbox-foursquare-web/target/kriswuollett-sandbox-foursquare-web/WEB-INF/classes:"kriswuollett-sandbox-foursquare-web/target/kriswuollett-sandbox-foursquare-web/WEB-INF/lib/*" kriswuollett.sandbox.foursquare.api.HelloServlet
