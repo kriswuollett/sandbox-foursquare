@@ -19,6 +19,14 @@
 			<artifactId>kriswuollett-sandbox-foursquare-api</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<!-- <dependency> <groupId>com.github.jsimone</groupId> <artifactId>webapp-runner</artifactId> 
+			<version>7.0.22.3</version> <scope>provided</scope> </dependency> -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>kriswuollett-sandbox-foursquare-web</finalName>
@@ -42,6 +50,7 @@
 						</goals>
 						<configuration>
 							<verbose>true</verbose>
+							<insertionMarker><![CDATA[<!-- jspc insertionMarker -->]]></insertionMarker>
 						</configuration>
 					</execution>
 				</executions>
@@ -75,10 +84,9 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<!--
-			     Delete the copied JSP resources to ensure that we only use compiled JSP servlets
-			     Delete the webfrag.xml after war goal to avoid annoying Eclipse warning. 
-			-->
+			<!-- Delete the copied JSP resources to ensure that we only use compiled 
+				JSP servlets Delete the webfrag.xml after war goal to avoid annoying Eclipse 
+				warning. -->
 			<plugin>
 				<artifactId>maven-clean-plugin</artifactId>
 				<version>2.5</version>
@@ -98,8 +106,39 @@
 										<include>webfrag.xml</include>
 										<include>**/*.jsp</include>
 									</includes>
+									<!-- Some servlet containers need to see the physical JSP file for Welcome mappings -->
+									<excludes>
+										<exclude>**/index.jsp</exclude>
+									</excludes>
 								</fileset>
 							</filesets>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-dependency-plugin</artifactId> 
+				<version>2.4</version> <executions> <execution> <phase>package</phase> <goals> 
+				<goal>copy-dependencies</goal> </goals> <configuration> <includeArtifactIds>webapp-runner</includeArtifactIds> 
+				</configuration> </execution> </executions> </plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>org.mortbay.jetty</groupId>
+									<artifactId>jetty-runner</artifactId>
+									<version>8.1.4.v20120524</version>
+									<destFileName>jetty-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
 						</configuration>
 					</execution>
 				</executions>
@@ -123,6 +162,19 @@
 										<versionRange>[8.1.4.v20120524,)</versionRange>
 										<goals>
 											<goal>jspc</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-dependency-plugin</artifactId>
+										<versionRange>[2.4,)</versionRange>
+										<goals>
+											<goal>copy-dependencies</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>

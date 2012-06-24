@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -cp kriswuollett-sandbox-foursquare-web/target/kriswuollett-sandbox-foursquare-web/WEB-INF/classes:"kriswuollett-sandbox-foursquare-web/target/kriswuollett-sandbox-foursquare-web/WEB-INF/lib/*" kriswuollett.sandbox.foursquare.api.HelloServlet
+web: java $JAVA_OPTS -jar kriswuollett-sandbox-foursquare-web/target/dependency/webapp-runner-7.0.22.3.jar --port $PORT kriswuollett-sandbox-foursquare-web/target/kriswuollett-sandbox-foursquare-web

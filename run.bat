@@ -1,1 +1,1 @@
-java -Dorg.eclipse.jetty.LEVEL=DEBUG -cp kriswuollett-sandbox-foursquare-web\target\kriswuollett-sandbox-foursquare-web\WEB-INF\classes;"kriswuollett-sandbox-foursquare-web\target\kriswuollett-sandbox-foursquare-web\WEB-INF\lib\*" kriswuollett.sandbox.foursquare.api.HelloServlet
+java -Dorg.eclipse.jetty.LEVEL=DEBUG -jar kriswuollett-sandbox-foursquare-web\target\dependency\jetty-runner.jar kriswuollett-sandbox-foursquare-web\target\kriswuollett-sandbox-foursquare-web.war
